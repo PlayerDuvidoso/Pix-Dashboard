@@ -96,12 +96,12 @@
     text-align: center;
 }
 
-.sale-dialog {
+.currency-dialog {
     border: none;
     border-radius: 10px;
 }
 
-.sale-dialog-container {
+.currency-dialog-container {
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
@@ -124,20 +124,20 @@
     gap: 1rem;
 }
 
-.sale-dialog-container div:first-child {
+.currency-dialog-container div:first-child {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-.sale-dialog-container input {
+.currency-dialog-container input {
     padding: .5rem .10rem;
     border-radius: 10px;
     border: 2px solid #9ca3af;
 }
 
-.sale-dialog-container input, label {
+.currency-dialog-container input, label {
     text-align: center;
     font-weight: 700;
     font-size: large;
