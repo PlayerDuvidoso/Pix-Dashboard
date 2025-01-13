@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="resources/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <span>Dashboard</span>
+            <h1 id="titulo-loja">Esquina da igrejinha</h1>
+            <div>
+                <span>configurações</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="summary">
+            <div class="summary-text-container">
+                <span>Total Diário:</span>
+                <span id="dailyTotal">R$ 0,00</span>
+            </div>
+            <button id="register-sale" data-modal="add-new-sale" type="button">
+                Registrar PIX
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Hora</th>
+                    <th>Valor</th>
+                </tr>
+            </table>
+
+            <dialog id="add-new-sale" class="sale-dialog">
+                <div class="sale-dialog-container">
+                    <div class="modal-input-container">
+                        <label for="pix-value">Adicionar Pix</label>
+                        <input type="text" class="sale-modal-input" dir="rtl" name="pix-value">
+                    </div>
+                    <div class="modal-btns">
+                        <button class="close-sale-btn" data-modal="add-new-sale" type="button">Cancelar</button>
+                        <button class="add-sale-btn" data-modal="add-new-sale" type="button">Adicionar</button>
+                    </div>
+                </div>
+            </dialog>
+
+        </div>
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script type="module" src="resources/script/main.js"></script>
+
+</body>
+</html>

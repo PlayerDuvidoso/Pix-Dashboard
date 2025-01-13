@@ -1,0 +1,181 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    background-color: #030712;
+    color: #f9fafb;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    font-size: larger;
+}
+
+.summary {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #9ca3af;
+    color: #f9fafb;
+    margin: 2rem auto;
+    padding: 1rem 1rem;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.summary button {
+    background-color: black;
+    color: #f9fafb;
+    border: none;
+    border-radius: 10px;
+    padding: 1.25rem 5rem;
+
+    font-size: large;
+    font-weight: 700;
+}
+
+.summary span {
+    font-size: x-large;
+}
+
+.table-container {
+    display: flex;
+    margin: auto;
+    width: 80%;
+    justify-content: center;
+    color: black;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.table-container th, .table-container td {
+    padding: 1rem;
+    border-bottom: 2px solid #9ca3af;
+    border-right: 2px solid #9ca3af;
+}
+
+.table-container tr th:first-child, .table-container tr td:first-child {
+    border-left: 2px solid #9ca3af
+}
+
+.table-container th {
+    border-top: 2px solid #9ca3af;
+}
+
+.table-container tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.table-container tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.table-container tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.table-container tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+.sale-time {
+    text-align: center;
+}
+
+.sale-value {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+.sale-dialog {
+    border: none;
+    border-radius: 10px;
+}
+
+.sale-dialog-container {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 1rem;
+    flex-grow: 1;
+}
+
+.modal-input-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    gap: .5rem;
+}
+
+.modal-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.sale-dialog-container div:first-child {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.sale-dialog-container input {
+    padding: .5rem .10rem;
+    border-radius: 10px;
+    border: 2px solid #9ca3af;
+}
+
+.sale-dialog-container input, label {
+    text-align: center;
+    font-weight: 700;
+    font-size: large;
+    outline: none;
+}
+
+.add-sale-btn {
+    background-color: rgb(79, 187, 79);
+    color: #f9fafb;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+
+    font-size: large;
+    font-weight: 500;
+}
+
+.close-sale-btn {
+    background-color: rgb(235, 91, 91);
+    color: #f9fafb;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+
+    font-size: large;
+    font-weight: 500;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+h1, h2 {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    background-color: #f3f4f6;
+    font-family: 'quicksand', sans-serif;
+}
