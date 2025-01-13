@@ -3,11 +3,11 @@ import Summary from "./summaryComponent.js";
 
 class TableRow {
 
-    constructor(hour, value) {
+    constructor(value) {
         this.tableRowElement = document.createElement("tr");
 
         this.hourElement = document.createElement("td");
-        this.hourElement.innerText = hour;
+        this.hourElement.innerText = this.getCurrentTime();
         this.hourElement.classList.add("sale-time");
 
         this.valueElement = document.createElement("td");
@@ -29,6 +29,12 @@ class TableRow {
         this.tableRowElement.appendChild(this.valueElement);
     };
 
+    getCurrentTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString("pt-BR", {hour: '2-digit', minute: '2-digit'});
+        return timeString;
+    };
+
     render() {
         return this.tableRowElement;
     };
@@ -36,8 +42,6 @@ class TableRow {
     remove() {
         this.tableRowElement.remove();
     };
-
-    //TODO: Move the time function to TableRow
 };
 
 class Table {
@@ -60,9 +64,7 @@ class Table {
     };
 
     addRow(value) {
-        const now = new Date();
-        const timeString = now.toLocaleTimeString("pt-BR", {hour: '2-digit', minute: '2-digit'});
-        const newRow = new TableRow(timeString, value);
+        const newRow = new TableRow(value);
         this.tableElement.appendChild(newRow.render());
     };
 
