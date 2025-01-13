@@ -5,7 +5,7 @@ import Modal from "./components/modalComponent.js";
 const registerSaleBtn = document.querySelector(".summary button");
 
 const tableComponent = new Table(".table-container table");
-const currencyInput = new CurrencyInput(".sale-modal-input", "R$");
+const currencyInput = new CurrencyInput(".currency-dialog-input", "R$");
 const modal = new Modal("#add-new-sale")
 
 currencyInput.inputElement.addEventListener("addSaleRequested", () => {

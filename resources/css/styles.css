@@ -109,7 +109,7 @@
     flex-grow: 1;
 }
 
-.modal-input-container{
+.currency-input-container{
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -117,7 +117,7 @@
     gap: .5rem;
 }
 
-.modal-btns {
+.currency-dialog-btns {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
