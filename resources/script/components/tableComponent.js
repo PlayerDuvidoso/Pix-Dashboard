@@ -2,12 +2,13 @@ import CurrencyParser from "../utils/currencyParser.js"
 import Summary from "./summaryComponent.js";
 import CustomModal from "./currencyModal.js";
 
-const customModal = new CustomModal("Editar Valor")
-const moneyInput = document.getElementById(customModal.getInputId());
-
 class TableRow {
 
     constructor(value) {
+
+        this.editValueModal = new CustomModal("Editar Valor")
+        this.moneyInput = document.getElementById(this.editValueModal.getInputId());
+
         this.tableRowElement = document.createElement("tr");
 
         this.hourElement = document.createElement("td");
@@ -34,15 +35,17 @@ class TableRow {
         this.tableRowElement.appendChild(this.hourElement);
         this.tableRowElement.appendChild(this.valueElement);
 
-        this.valueElement.addEventListener("click", () => {
-            customModal.show();
+        this.valueText.addEventListener("click", () => {
+            this.editValueModal.show();
+            this.moneyInput.addEventListener("confirm", this.handleEditEvent.bind(this))
         })
-
-        moneyInput.addEventListener("confirm", (Event) => {
-            this.valueText.innerText = Event.detail.value
-            customModal.close()
-        });
     };
+
+    handleEditEvent(Event) {
+        this.valueText.innerText = Event.detail.value
+        this.editValueModal.close()
+        this.moneyInput.removeEventListener("confirm", this.handleEditEvent)
+    }
 
     getCurrentTime() {
         const now = new Date();
