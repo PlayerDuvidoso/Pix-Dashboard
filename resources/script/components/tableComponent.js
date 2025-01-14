@@ -7,7 +7,6 @@ class TableRow {
     constructor(value) {
 
         this.editValueModal = new CustomModal("Editar Valor")
-        this.moneyInput = document.getElementById(this.editValueModal.getInputId());
 
         this.tableRowElement = document.createElement("tr");
 
@@ -20,7 +19,6 @@ class TableRow {
         this.valueText = document.createElement("span");
         this.valueText.innerText = value;
         this.valueElement.appendChild(this.valueText);
-        
         
         this.removeIco = document.createElement("i");
         this.removeIco.classList.add("fa-solid", "fa-trash")
@@ -37,15 +35,21 @@ class TableRow {
 
         this.valueText.addEventListener("click", () => {
             this.editValueModal.show();
-            this.moneyInput.addEventListener("confirm", this.handleEditEvent.bind(this))
+            this.editValueModal.dialogElement.addEventListener("confirm", this.handleConfirmEvent.bind(this))
+            this.editValueModal.dialogElement.addEventListener("cancel", this.handleCancelEvent.bind(this))
         })
     };
 
-    handleEditEvent(Event) {
-        this.valueText.innerText = Event.detail.value
-        this.editValueModal.close()
-        this.moneyInput.removeEventListener("confirm", this.handleEditEvent)
-    }
+    handleConfirmEvent(Event) {
+        this.valueText.innerText = Event.detail.value;
+        this.editValueModal.close();
+        this.editValueModal.dialogElement.removeEventListener("confirm", this.handleConfirmEvent);
+    };
+
+    handleCancelEvent() {
+        this.editValueModal.close();
+        this.editValueModal.dialogElement.removeEventListener("cancel", this.handleCancelEvent);
+    };
 
     getCurrentTime() {
         const now = new Date();
@@ -71,13 +75,13 @@ class Table {
         this.tableValue = this.getTotalValue();
 
         this.observer = new MutationObserver(mutations => {
-            this.tableValue = this.getTotalValue()
-            this.summary.updateValue(this.tableValue)
-            this.checkTable(this.tableElement.querySelectorAll(".sale-value"))
+            this.tableValue = this.getTotalValue();
+            this.summary.updateValue(this.tableValue);
+            this.checkTable(this.tableElement.querySelectorAll(".sale-value"));
         })
 
-        const config = { childList: true, subtree: true}
-        this.observer.observe(this.tableElement, config)
+        const config = { childList: true, subtree: true};
+        this.observer.observe(this.tableElement, config);
 
     };
 
@@ -95,7 +99,7 @@ class Table {
         };
 
         tableData.forEach(element => {
-            partialValue += Number(this.parser.extract(element.innerText))
+            partialValue += Number(this.parser.extract(element.innerText));
         });
 
         return this.parser.format(partialValue);
@@ -105,11 +109,11 @@ class Table {
         
         if (tableData.length <= 0) {
             this.tableElement.hidden = true;
-            this.summary.updateValue(this.parser.format("000"))
-            return false
+            this.summary.updateValue(this.parser.format("000"));
+            return false;
         } else if (tableData.length >= 1) {
             this.tableElement.hidden = false;
-            return true
+            return true;
         };
     };
 };

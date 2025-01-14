@@ -3,7 +3,7 @@ import CurrencyParser from "../utils/currencyParser.js";
 
 class CurrencyInput {
     
-    constructor(currency, id=null) {
+    constructor(currency) {
         this.parser = new CurrencyParser(currency);
 
         this.inputElement = document.createElement("input");
@@ -11,7 +11,6 @@ class CurrencyInput {
         this.inputElement.type = "text"
         this.inputElement.dir = "rtl"
         this.inputElement.name = "value"
-        this.inputElement.id = id ? id : null
 
         this.inputElement.addEventListener("input", this.inputEventHandler.bind(this));
         this.inputElement.addEventListener("keydown", this.keyPressEventHandler.bind(this));

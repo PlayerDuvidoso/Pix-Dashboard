@@ -3,8 +3,7 @@ import CurrencyInput from "./moneyInput.js"
 class DialogInput {
 
     constructor(label) {
-        this.inputId = crypto.randomUUID()
-        this.currencyInput = new CurrencyInput("R$", this.inputId);
+        this.currencyInput = new CurrencyInput("R$");
 
         this.inputContainer = document.createElement("div");
         this.inputContainer.classList.add("currency-dialog-container");
@@ -27,6 +26,10 @@ class DialogInput {
 
     getInputValue() {
         return this.currencyInput.getValue();
+    };
+
+    getInputElement() {
+        return this.currencyInput.render();
     };
 };
 
@@ -54,6 +57,14 @@ class DialogButtons {
     render() {
         return this.btnsContainer;
     };
+
+    getConfirmBtn() {
+        return this.confirmBtn
+    }
+
+    getCancelBtn() {
+        return this.cancelBtn
+    }
 };
 
 class CustomModal {
@@ -76,17 +87,31 @@ class CustomModal {
     };
 
     show() {
+        const input = this.dialogInput.getInputElement();
+
         this.dialogInput.resetInput();
         this.dialogElement.showModal();
+
+        input.addEventListener("confirm", this.handleConfirmEvent.bind(this))
+        input.addEventListener("cancel", this.handleCancelEvent.bind(this))
+        this.dialogButtons.getConfirmBtn().addEventListener("click", this.handleConfirmEvent.bind(this))
+        this.dialogButtons.getCancelBtn().addEventListener("click", this.handleCancelEvent.bind(this))
     };
 
     close() {
         this.dialogElement.close();
-    }
+    };
 
-    getInputId() {
-        return this.dialogInput.inputId
-    }
+    handleConfirmEvent(Event) {
+        const inputValue = this.dialogInput.getInputValue()
+        const onConfirm = new CustomEvent("confirm", {detail: {value: inputValue}})
+        this.dialogElement.dispatchEvent(onConfirm)
+    };
+
+    handleCancelEvent(Event) {
+        const onCancel = new CustomEvent("cancel")
+        this.dialogElement.dispatchEvent(onCancel)
+    };
 
 };
 
