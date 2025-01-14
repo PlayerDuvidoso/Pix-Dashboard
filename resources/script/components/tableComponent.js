@@ -3,6 +3,7 @@ import Summary from "./summaryComponent.js";
 import CustomModal from "./currencyModal.js";
 
 const customModal = new CustomModal("Editar Valor")
+const moneyInput = document.getElementById(customModal.getInputId());
 
 class TableRow {
 
@@ -15,8 +16,10 @@ class TableRow {
 
         this.valueElement = document.createElement("td");
         this.valueElement.classList.add("sale-value");
-        this.valueElement.innerText = value;
-
+        this.valueText = document.createElement("span");
+        this.valueText.innerText = value;
+        this.valueElement.appendChild(this.valueText);
+        
         
         this.removeIco = document.createElement("i");
         this.removeIco.classList.add("fa-solid", "fa-trash")
@@ -25,9 +28,9 @@ class TableRow {
         this.removeBtnElement.appendChild(this.removeIco);
         this.removeBtnElement.type = "button";
         this.removeBtnElement.addEventListener("click", () => {this.remove()})
-
+        
         this.valueElement.appendChild(this.removeBtnElement);
-
+        
         this.tableRowElement.appendChild(this.hourElement);
         this.tableRowElement.appendChild(this.valueElement);
 
@@ -35,6 +38,10 @@ class TableRow {
             customModal.show();
         })
 
+        moneyInput.addEventListener("confirm", (Event) => {
+            this.valueText.innerText = Event.detail.value
+            customModal.close()
+        });
     };
 
     getCurrentTime() {
@@ -102,7 +109,6 @@ class Table {
             return true
         };
     };
-
 };
 
 export default Table;

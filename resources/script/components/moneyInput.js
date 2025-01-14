@@ -3,14 +3,14 @@ import CurrencyParser from "../utils/currencyParser.js";
 
 class CurrencyInput {
     
-    constructor(currency) {
+    constructor(currency, id=null) {
         this.parser = new CurrencyParser(currency);
-        
         this.inputElement = document.createElement("input");
         this.inputElement.classList.add("currency-dialog-input")
         this.inputElement.type = "text"
         this.inputElement.dir = "rtl"
         this.inputElement.name = "value"
+        this.inputElement.id = id ? id : null
 
         this.inputElement.addEventListener("input", this.inputEventHandler.bind(this));
         this.inputElement.addEventListener("keydown", this.keyPressEventHandler.bind(this));
@@ -67,13 +67,13 @@ class CurrencyInput {
         };
 
         if (pressedKey === "Enter") {
-            const addSaleEvent = new CustomEvent("addSaleRequested", {detail: {value: this.getValue()}})
-            this.inputElement.dispatchEvent(addSaleEvent)
+            const confirmEvent = new CustomEvent("confirm", {detail: {value: this.getValue()}})
+            this.inputElement.dispatchEvent(confirmEvent)
             return
         };
 
         if (pressedKey === "Escape") {
-            const cancelSaleEvent = new CustomEvent("addSaleCanceled")
+            const cancelSaleEvent = new CustomEvent("cancel")
             this.inputElement.dispatchEvent(cancelSaleEvent)
             return
         };

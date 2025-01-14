@@ -3,16 +3,17 @@ import CurrencyInput from "./moneyInput.js"
 class DialogInput {
 
     constructor(label) {
-        this.currencyInput = new CurrencyInput("R$");
+        this.inputId = crypto.randomUUID()
+        this.currencyInput = new CurrencyInput("R$", this.inputId);
 
         this.inputContainer = document.createElement("div");
         this.inputContainer.classList.add("currency-dialog-container");
 
-        this.dialogLabel = document.createElement("label");
-        this.dialogLabel.htmlFor = "value";
-        this.dialogLabel.innerText = label;
+        const dialogLabel = document.createElement("label");
+        dialogLabel.htmlFor = "value";
+        dialogLabel.innerText = label;
 
-        this.inputContainer.appendChild(this.dialogLabel);
+        this.inputContainer.appendChild(dialogLabel);
         this.inputContainer.appendChild(this.currencyInput.render());
     }
 
@@ -22,12 +23,12 @@ class DialogInput {
 
     resetInput() {
         this.currencyInput.resetInput();
-    }
+    };
 
     getInputValue() {
-        return this.currencyInput.getValue()
-    }
-}
+        return this.currencyInput.getValue();
+    };
+};
 
 class DialogButtons {
 
@@ -38,7 +39,7 @@ class DialogButtons {
         this.cancelBtn = document.createElement("button");
         this.cancelBtn.classList.add("close-sale-btn");
         this.cancelBtn.type = "button";
-        this.cancelBtn.innerText = "Cancelar"
+        this.cancelBtn.innerText = "Cancelar";
 
         this.confirmBtn = document.createElement("button");
         this.confirmBtn.classList.add("add-sale-btn");
@@ -48,13 +49,12 @@ class DialogButtons {
         this.btnsContainer.appendChild(this.cancelBtn);
         this.btnsContainer.appendChild(this.confirmBtn);
 
-    }
+    };
 
     render() {
         return this.btnsContainer;
-    }
-
-}
+    };
+};
 
 class CustomModal {
 
@@ -69,18 +69,25 @@ class CustomModal {
         this.dialogContainer = document.createElement("div");
         this.dialogContainer.classList.add("currency-input-container");
 
-        this.dialogContainer.appendChild(this.dialogInput.render())
-        this.dialogContainer.appendChild(this.dialogButtons.render())
+        this.dialogContainer.appendChild(this.dialogInput.render());
+        this.dialogContainer.appendChild(this.dialogButtons.render());
         this.dialogElement.appendChild(this.dialogContainer);
 
-    }
+    };
 
     show() {
         this.dialogInput.resetInput();
         this.dialogElement.showModal();
+    };
 
+    close() {
+        this.dialogElement.close();
     }
-    //TODO: Add dialog class
-}
+
+    getInputId() {
+        return this.dialogInput.inputId
+    }
+
+};
 
 export default CustomModal;
