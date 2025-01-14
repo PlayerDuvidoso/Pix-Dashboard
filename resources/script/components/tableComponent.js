@@ -1,5 +1,8 @@
 import CurrencyParser from "../utils/currencyParser.js"
 import Summary from "./summaryComponent.js";
+import CustomModal from "./currencyModal.js";
+
+const customModal = new CustomModal("Editar Valor")
 
 class TableRow {
 
@@ -27,6 +30,11 @@ class TableRow {
 
         this.tableRowElement.appendChild(this.hourElement);
         this.tableRowElement.appendChild(this.valueElement);
+
+        this.valueElement.addEventListener("click", () => {
+            customModal.show();
+        })
+
     };
 
     getCurrentTime() {
