@@ -9,7 +9,7 @@ class Summary {
     updateValue(value) {
         this.summaryElement.innerText = value
     }
-
+    //TODO: Fix value less than 0,00 BUG
 };
 
 export default Summary;

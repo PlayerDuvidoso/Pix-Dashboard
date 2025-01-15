@@ -1,4 +1,4 @@
-import CurrencyInput from "./moneyInput.js"
+import CurrencyInput from "./currencyInput.js"
 
 class DialogInput {
 
@@ -13,7 +13,7 @@ class DialogInput {
         dialogLabel.innerText = label;
 
         this.inputContainer.appendChild(dialogLabel);
-        this.inputContainer.appendChild(this.currencyInput.render());
+        this.inputContainer.appendChild(this.getInputElement());
     }
 
     render() {
@@ -74,7 +74,6 @@ class CustomModal {
         this.dialogButtons = new DialogButtons();
 
         this.dialogElement = document.createElement("dialog");
-        document.body.appendChild(this.dialogElement)
         this.dialogElement.classList.add("currency-dialog");
 
         this.dialogContainer = document.createElement("div");
@@ -87,6 +86,7 @@ class CustomModal {
     };
 
     show() {
+        document.body.appendChild(this.dialogElement)
         const input = this.dialogInput.getInputElement();
 
         this.dialogInput.resetInput();
@@ -100,6 +100,7 @@ class CustomModal {
 
     close() {
         this.dialogElement.close();
+        this.dialogElement.remove()
     };
 
     handleConfirmEvent(Event) {

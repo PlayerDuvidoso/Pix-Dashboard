@@ -1,45 +1,24 @@
-import CurrencyInput from "./components/currencyInput.js";
 import Table from "./components/tableComponent.js";
-import Modal from "./components/modalComponent.js";
+import CustomModal from "./components/currencyModal.js";
 
 const registerSaleBtn = document.querySelector(".summary button");
 
 const tableComponent = new Table(".table-container table");
-const currencyInput = new CurrencyInput(".currency-dialog-input", "R$");
-const modal = new Modal("#add-new-sale")
-
-currencyInput.inputElement.addEventListener("addSaleRequested", () => {
-    
-    registerSaleBtn.disabled = true;
-    tableComponent.addRow(currencyInput.getValue())
-
-    modal.close();
-    setTimeout(() => {registerSaleBtn.disabled = false}, 1)
-
-});
-
-currencyInput.inputElement.addEventListener("addSaleCanceled", () => {
-
-    modal.close();
-
-})
 
 registerSaleBtn.addEventListener("click", () => {
+    const modal = new CustomModal("Adicionar Pix")
+    registerSaleBtn.disabled = true;
+    modal.show()
 
-    modal.show();
-    currencyInput.resetInput();
-    
-});
+    modal.dialogElement.addEventListener("confirm", (Event) => {
+        const inputValue = Event.detail.value
+        tableComponent.addRow(inputValue)
+        setTimeout(() => {registerSaleBtn.disabled = false;}, 1)
+        modal.close()
+    });
 
-const addSaleBtn = document.querySelector(".add-sale-btn");
-addSaleBtn.addEventListener("click", () => {
-
-    tableComponent.addRow(currencyInput.getValue());
-    modal.close();
-});
-
-const closeSaleBtn = document.querySelector(".close-sale-btn");
-closeSaleBtn.addEventListener("click", () => {
-
-    modal.close();
+    modal.dialogElement.addEventListener("cancel", (Event) => {
+        setTimeout(() => {registerSaleBtn.disabled = false;}, 1)
+        modal.close()
+    });
 });
